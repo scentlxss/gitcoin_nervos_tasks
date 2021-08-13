@@ -1,8 +1,8 @@
-deployment transaction hash: 0xe30706b58c02697ec5926ae3b79eda772aaa9801d36808c6e2ac640ba5aec36e
-contract address: 0x06e3EB2ddFfEA52b923f5c75efF65d0ede5F124B
+deployment transaction hash: 0x4a6acd74011f8e541c87940dc54fa59992128ffd1e274fd6814ecba568370624
+contract address: 0xC3BD2e73fc4d1B2C20A2337096590eDE67D2f039
 
-abi: 
-
+abi:
+  [
     {
       "inputs": [],
       "stateMutability": "nonpayable",
@@ -81,4 +81,4 @@ abi:
       "stateMutability": "nonpayable",
       "type": "function"
     }
-
+  ] 
