@@ -4,7 +4,7 @@
 I ported an existing ethereum DApp that can be used to make donations in the future to an address.
 The solidity contract used was Trust.sol.
 
-```
+```solidity
 pragma solidity=0.8.3;
 
 contract Trust {
@@ -56,8 +56,8 @@ This simple contract only has two functions which are: payable addKid which take
 ## Web3 Provider changes
 We used ReactJs for the front-end. To port to Polyjuice is just needed a few changes on the front-end of original ethereum DApp. Like the web3 creation here where we set the polyjuice provider. In /src/ui/app.tsx.
 
-
-``` ethereum DApp: 
+The createWeb3 function was changed from this:
+```javascript
 async function createWeb3() {                                                             
     // Modern dapp browsers...                                                            
     if ((window as any).ethereum) {                                                       
@@ -79,8 +79,8 @@ async function createWeb3() {
 
 ```
 
-
-``` Ported DApp
+to:
+```javascript
 async function createWeb3() {                                                             
     // Modern dapp browsers...                                                            
     if ((window as any).ethereum) {                                                       
@@ -112,7 +112,7 @@ async function createWeb3() {
 
 To set the provider we created the following object in /src/config.ts and imported in our /src/ui/app.tsx, also we need to import the PolyjuiceHttpProvider web3 implementation.
 
-```
+```javascript
 export const CONFIG = {
     WEB3_PROVIDER_URL: 'https://godwoken-testnet-web3-rpc.ckbapp.dev',
     ROLLUP_TYPE_HASH: '0x4cc2e6526204ae6a2e8fcf12f7ad472f41a1606d5b9624beebd215d780809f6a',
@@ -126,7 +126,7 @@ import { PolyjuiceHttpProvider } from '@polyjuice-provider/web3';
 ```
 And we added a effect where we set the polyjuice address got from the Address Translator which is imported as well.
 
- ```
+ ```javascript
 
     useEffect(() => {                                                                                           
         if (accounts?.[0]) {                                                                                    
@@ -138,14 +138,14 @@ And we added a effect where we set the polyjuice address got from the Address Tr
     }, [accounts?.[0]]);
 ```
            
-```
+```javascript
 import { AddressTranslator } from 'nervos-godwoken-integration';      
 ```
 
 ## Contract Wrapper changes
 In the contract calls wrapper in /src/lib/contracts/TrustWrapper.ts is important to send default options.
 
-```
+```javascript
 const DEFAULT_SEND_OPTIONS = {
     gas: 6000000
 };    
@@ -153,7 +153,7 @@ const DEFAULT_SEND_OPTIONS = {
 
 and include them in the transaction .send({....}) in those used in the wrapper.
 
-```
+```javascript
 
     async withdrawFunds(fromAddress: string) {                                                                                                                                    
         const tx = await this.contract.methods.withdraw().send({                                                                                                                  
