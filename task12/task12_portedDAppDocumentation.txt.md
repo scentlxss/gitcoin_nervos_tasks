@@ -216,3 +216,6 @@ Then we see the transaction has been processed and our balance has changed.
 Later we withdraw the amount.
 
 <img src=./task7_4_afterWithdraw.png >
+
+This polyjuice DApp can be found in https://github.com/scentlxss/future_donations_ported_dapp
+and original ethereum DApp in https://github.com/scentlxss/ethereum_dapp_example .
