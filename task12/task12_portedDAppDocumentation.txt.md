@@ -1,5 +1,6 @@
 # My ported DApp to Polyjuice
 
+## Contract
 I ported an existing ethereum DApp that can be used to make donations in the future to an address.
 The solidity contract used was Trust.sol.
 
@@ -51,7 +52,10 @@ contract Trust {
 
 This simple contract only has two functions which are: payable addKid which takes an address and integer and sets the amount of tokens which are added to a mapping and locked in time, this data is used in withdraw function that can be used by the address in the mapping to unlock the donation later some time in the future. This contract can be extended to meet more requirements for the unlocked amount.
 
+
+## Web3 Provider changes
 We used ReactJs for the front-end. To port to Polyjuice is just needed a few changes on the front-end of original ethereum DApp. Like the web3 creation here where we set the polyjuice provider. In /src/ui/app.tsx.
+
 
 ``` ethereum DApp: 
 async function createWeb3() {                                                             
@@ -138,6 +142,7 @@ And we added a effect where we set the polyjuice address got from the Address Tr
 import { AddressTranslator } from 'nervos-godwoken-integration';      
 ```
 
+## Contract Wrapper changes
 In the contract calls wrapper in /src/lib/contracts/TrustWrapper.ts is important to send default options.
 
 ```
@@ -188,6 +193,8 @@ and include them in the transaction .send({....}) in those used in the wrapper.
 ```
 Also when sending the transactions we should take into account that the amount of CKB to send is 10^8 shannons.
 
+## Test
+
 And the Dapp runs smoothly in port 3000 running the following command.
 ```
 yarn && yarn build && yarn ui
@@ -196,18 +203,16 @@ yarn && yarn build && yarn ui
 
 Here we deploy the contract.
 
-![[task7_1_deployed.png]]
-
+<img src=./task7_1_deployed.png >
 
 Then we can call the addkid function to add a donation to my own address.
 
-![[task7_2_signing_AddKid_tx.png]]
+<img src=./task7_2_signing_AddKid_tx.png >
 
 Then we see the transaction has been processed and our balance has changed.
 
-![[task7_3_afterAddKid.png]]
+<img src=./task7_3_afterAddKid.png >
 
 Later we withdraw the amount.
 
-
-![[task7_4_afterWithdraw.png]]
+<img src=./task7_4_afterWithdraw.png >
